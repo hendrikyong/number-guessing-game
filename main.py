@@ -3,7 +3,6 @@ import random
 num = random.randint(1, 100)
 lives = 5
 print(f"You have {lives} lives.")
-print(num)
 game_on = True
 
 while game_on:
