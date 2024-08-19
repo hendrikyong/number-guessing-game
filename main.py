@@ -46,14 +46,17 @@ def end_game():
 def play_again():
     start_game()
 
+def quit_game():
+    root.destroy()
+
 # GUI structure 
 root = tk.Tk()
 root.title("Number Guessing Game")
 root.geometry("550x550")
 
-# Frame to group the title and button together
+# frame to group the title and buttons together
 frame = tk.Frame(root)
-frame.pack(pady=180)  
+frame.pack(pady=180, fill=tk.BOTH, expand=True)  
 
 # GUI displays and buttons
 game_title = tk.Label(frame, text="Welcome to Number Guessing Game!", font=('Helvetica', 18))
@@ -63,5 +66,7 @@ play_button.pack(pady=10)
 guess_entry = tk.Entry(frame, font=('Helvetica', 14))
 guess_button = tk.Button(frame, text="Submit Guess", font=('Helvetica', 14), command=check_guess)
 play_again_button = tk.Button(frame, text="Play Again", font=('Helvetica', 14), command=play_again)
+quit_button = tk.Button(root, text="Quit Game", font=('Helvetica', 14), command=quit_game)
+quit_button.place(x=500, y=500, anchor=tk.SE)
 
 root.mainloop()
