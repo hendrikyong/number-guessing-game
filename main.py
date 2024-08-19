@@ -9,6 +9,7 @@ def start_game():
     guess_entry.pack(pady=10)
     guess_button.pack(pady=10)
     play_button.pack_forget()
+    play_again_button.pack_forget()
 
 def check_guess():
     global lives
@@ -23,19 +24,27 @@ def check_guess():
                 game_title.config(text=f"Too low! Guess Higher. Lives remaining: {lives}")
             else:
                 game_title.config(text=f"You've run out of lives. The number was {num}.")
-                guess_button.config(state="disabled")
+                end_game()
         elif guess > num:
             lives -= 1
             if lives > 0:
                 game_title.config(text=f"Too high! Guess Lower. Lives remaining: {lives}")
             else:
                 game_title.config(text=f"You run out of lives. The number was {num}.")
-                guess_button.config(state="disabled")
+                end_game()
         else:
             game_title.config(text=f"You got it right! The number is {num}.")
-            guess_button.config(state="disabled")
+            end_game()
     except ValueError:
         game_title.config(text="Invalid input. Please enter a number.")
+
+def end_game():
+    guess_entry.pack_forget()
+    guess_button.pack_forget()
+    play_again_button.pack(pady=10)
+
+def play_again():
+    start_game()
 
 # GUI structure 
 root = tk.Tk()
@@ -53,5 +62,6 @@ play_button = tk.Button(frame, text="Play Game", font=('Helvetica', 14), command
 play_button.pack(pady=10)  
 guess_entry = tk.Entry(frame, font=('Helvetica', 14))
 guess_button = tk.Button(frame, text="Submit Guess", font=('Helvetica', 14), command=check_guess)
+play_again_button = tk.Button(frame, text="Play Again", font=('Helvetica', 14), command=play_again)
 
 root.mainloop()
